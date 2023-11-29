@@ -57,6 +57,7 @@
             }
         }
 
+
         //CONSTRUCTORS 
         public Character(string name, int maxLife, int hitChance, int block, int life)
         {

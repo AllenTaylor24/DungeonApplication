@@ -15,6 +15,7 @@ namespace DungeonLibray
         private int _bonusHitChance;
         private bool _isTwoHanded;
 
+        
         //Properties
         public int MaxDamage
         {
