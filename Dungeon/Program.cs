@@ -50,6 +50,7 @@ namespace DungeonApplication
                 #region Room Creation
 
                 //TODO Create a room (GetRoom())
+                Console.WriteLine(GetRoom());
 
                 #endregion
 
@@ -135,6 +136,21 @@ namespace DungeonApplication
         #region Create GetRoom() Functionality
 
         //Create GetRoom()
+        private static string GetRoom()
+        {
+            string[] rooms = { 
+                "Imagine stepping into a room shrouded in darkness. The walls are adorned with ancient, cobweb-covered paintings that seem to follow your every move.",
+                "Imagine stepping into a cozy room with soft lighting, comfy furniture, and beautiful artwork. It's a perfecft space to relax and unwind, surrounded by a warm and inviting atmosphere.",
+                "Picture stepping into a dimly lit room, with flickering candles casting eerie shadows on the walls. The air feels heavy, and you can hear faint whispers echoing in the distance. ",
+                "Imagine stepping into a room that seems frozen in time. The walls are peeling wallpaper, revealing glimpses of faded portraits."
+            };
+
+            Random random = new Random(); 
+            int index = random.Next(rooms.Length);
+            return rooms[index];  
+        }
+
+
 
         #endregion
     }
