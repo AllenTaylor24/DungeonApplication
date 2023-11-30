@@ -28,7 +28,7 @@ namespace DungeonApplication
             #region Weapon Object Creation
 
             //TODO Create a Weapon
-            Weapon w1 = new Weapon("Dragon Slayer", 45, 5, 15, true);
+            Weapon w1 = new Weapon(" The Dragon Slayer", 20, 10, 5, true, WeaponType.Sword);
 
             // Console.WriteLine($"\nWeapon Name:{w1.Name}\nDamage:{w1.MaxDamage}-{w1.MinDamage}\nBonus Hit Chance: {w1.BonusHitChance}%\n" +
             //   $"Handedness: {w1.IsTwoHanded}");
