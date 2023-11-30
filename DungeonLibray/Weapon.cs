@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonLibray;
 
 namespace DungeonLibray
 {
@@ -14,6 +15,7 @@ namespace DungeonLibray
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
+
 
         
         //Properties
@@ -53,22 +55,26 @@ namespace DungeonLibray
                 }
             }
         }
+        public WeaponType Type { get; set; }
         //Constructors
-        public Weapon (string name, int maxDamage, int minDamage, int bonusHitChance, bool isTwoHanded)
+        public Weapon (string name, int maxDamage, int minDamage, int bonusHitChance, bool isTwoHanded, WeaponType type)
         {
             MaxDamage = maxDamage;
             MinDamage = minDamage;
             Name = name;
             BonusHitChance = bonusHitChance;
             IsTwoHanded = isTwoHanded;
+            Type = type;
         }
         //Methods
         public override string ToString()
         {
             string handedness = IsTwoHanded ? "Two-Handed" : "One-Handed";
-            return $"Name:{Name}, Damage:{MinDamage}-{MaxDamage}, Bonus Hit Chance: {BonusHitChance}," +
-                $"Handedness: {handedness}";
+            return $"Name:{Name}, Damage:{MinDamage}-{MaxDamage}, Bonus Hit Chance: {BonusHitChance} " +
+                $"Handedness: {handedness}  Weapon Type: {Type}";
         }
+
+
     }
 
 }
