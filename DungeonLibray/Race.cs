@@ -13,6 +13,6 @@ namespace DungeonLibray
         Griffin,
         Dwarf,
         Cyclops,
-
+        Human,
     }
 }

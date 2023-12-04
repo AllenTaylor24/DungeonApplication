@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DungeonLibray;
 
 namespace DungeonLibray
 {
@@ -15,6 +14,7 @@ namespace DungeonLibray
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
+        private WeaponType _type;
 
 
         
@@ -70,8 +70,8 @@ namespace DungeonLibray
         public override string ToString()
         {
             string handedness = IsTwoHanded ? "Two-Handed" : "One-Handed";
-            return $"Name:{Name}, Damage:{MinDamage}-{MaxDamage}, Bonus Hit Chance: {BonusHitChance} " +
-                $"Handedness: {handedness}  Weapon Type: {Type}";
+            return $"\n-=-=-= WEAPON =-=-=-\nName:{Name}\nDamage:{MinDamage}-{MaxDamage}\nBonus Hit Chance: {BonusHitChance} " +
+                $"\nHandedness: {handedness} \nWeapon Type: {Type}";
         }
 
 

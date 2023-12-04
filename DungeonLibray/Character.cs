@@ -1,6 +1,11 @@
 ﻿namespace DungeonLibray
 {
-    public class Character
+    //The "abstract" modidifer
+    //Denotes this datatype class is "incompleete" -- we don't intend to have 
+    //"Characters", and we instead only awantt the more specific child classes
+    //in our game (Player & MOnster). Abstracct maes vit so we cannotcreate
+    //just a Character -- it must be more sepcifc
+    public abstract class Character
     {
         /*
           * Creates Fields and Properties for each of the followin attributes.
@@ -68,15 +73,15 @@
             Block = block;
             
         }
-        public int CalcBlock()
+        public virtual int CalcBlock()
         {
             return _block;
         }
-        public int CalcHitChance()
+        public virtual int CalcHitChance()
         {
             return HitChance;
         }
-        public int CalcDamage()
+        public virtual int CalcDamage()
         {
             return 0;
         }
