@@ -11,7 +11,7 @@ namespace DungeonLibray
         Sword,
         GrenadeLauncher,
         Knife,
-        NerfGun,
+        Axe,
         Projectile,
         
     }

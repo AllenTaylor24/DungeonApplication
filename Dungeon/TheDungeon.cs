@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DungeonLibray;
@@ -27,27 +28,24 @@ namespace DungeonApplication
 
             #region Weapon Object Creation
 
-            //TODO Create a Weapon
-            Weapon w1 = new Weapon("The Dragon Slayer", 35, 20, 10, true, WeaponType.Sword);
-            Weapon w2 = new Weapon("Nerf Gun", 25, 15, 5, false, WeaponType.Projectile);
-            Weapon w3 = new Weapon("Bloody Dagger", 15, 10, 5, false, WeaponType.Knife);
+            Weapon chosenWeapon = GetWeapon();
 
-            //Console.WriteLine(w1);
+            #endregion
 
+            #region Race Customization
+            Race race = GetRace();
             #endregion
             #region Cumstomization Option - Player Customization
 
-            //Alow the player to choose certain aspects of their charcater.
-            Console.Write("Pleaser enter your name: ");
+            //Allow the player to choose certain aspects of their charcater.
+            Console.Write("Please enter your name: ");
             string playerName = Console.ReadLine();
             #endregion
 
             #region Player Object Creation
 
-            Player player = new Player(playerName, 150, 35, 15, 115, Race.Werewolf, w2);
-            //Player player2 = new Player("Guts", 200, 50, 25, 200, Race.Human, w1);
+            Player player = new Player(playerName, 150, 35, 15, 115, race,chosenWeapon);
 
-            //Console.WriteLine(p1);
             #endregion
 
             #region Main Game Loop
@@ -58,21 +56,7 @@ namespace DungeonApplication
             {
                 #region Monster Object Creation
 
-                Demogorgon demogorgon = new Demogorgon("Slimy Demogorgon", 250, 30, 50, 250, 50, 30, "That is a slimy monster!", true);
-                Demogorgon demogorgon2 = new Demogorgon("Demogorgon", 200, 25, 30, 150, 30, 25, "That is a nasty looking monster!", false);
-
-                Griffin griffin = new Griffin("Griffin", 150, 20, 30, 120, 30, 10, "...", 10, 30);
-                Griffin griffin2 = new Griffin("Two-Headed Griffin", 200, 25, 30, 120, 25, 10, "....", 15, 35);
-
-                Vampire vampire = new Vampire("Dracula", 100, 25, 15, 100, 25, 15, "A blood-sucking fiend.");
-
-                Monster[] monsters = { demogorgon, demogorgon2, griffin, griffin2, vampire , vampire};
-
-                Random randMonster = new Random();
-
-                int randNbr = randMonster.Next(monsters.Length);
-
-                Monster chosenMonster = monsters[randNbr];
+                Monster chosenMonster = GetMonster();
 
 
                 #endregion
@@ -117,14 +101,14 @@ namespace DungeonApplication
                             //You could consider giving bonuses based on the player's race,
                             //weapon, the monster they are facing, etc.
 
-                            //if (player.CharacterRace == Race.Griffin)
-                            //{
-                            //    Combat.DoAttack(player, chosenMonster);
-                            //}
-                            //if (player.EquppiedWeapon.Name == "The Dragon Slayer" && chosenMonster.GetType().ToString() == "Dragon")
-                            //{
-                            //    Combat.DoAttack(player, chosenMonster);
-                            //}
+                            if (player.CharacterRace == DungeonLibray.Race.Human)
+                            {
+                                Combat.DoAttack(player, chosenMonster);
+                            }
+                            if (player.EquppiedWeapon.Name == "The Dragon Slayer" && chosenMonster.GetType().ToString() == "Dragon")
+                            {
+                                Combat.DoAttack(player, chosenMonster);
+                            }
                             #endregion
 
                             //Execute Combat
@@ -136,17 +120,7 @@ namespace DungeonApplication
                                 #region Customization Option - Combat Rewards
 
                                 //You could add some logic here to grant the Player life:
-                                //player.Life += 5;
-
-                                //Or, loot drops! (Note: This would require an Item class, 
-                                //as well as a property for the player of type List<Item>):
-
-
-                                //Item rubyNecklace = new Item("Ruby Necklace", "Increases Max Life", MaxLife, 10);
-                                //player.Inventory.Add(rubyNecklace);
-                                //Console.WriteLine($"{player.Name} received {rubyNecklace.Name}!");
-                                //Console.WriteLine($"{rubyNecklace}");
-
+                                player.Life += 10;
 
                                 #endregion
 
@@ -208,9 +182,6 @@ namespace DungeonApplication
                         exit = true;
                     }
 
-
-
-        
                     #endregion
 
                     #endregion
@@ -225,11 +196,115 @@ namespace DungeonApplication
 
             #region Output Final Score / End the Game
 
-            //TODO Output Final Score & End the Game
-            Console.WriteLine("You defeated " + score + " monster" + ((score == 1) ? ".": "s."));
+            Console.WriteLine("You defeated " + score + " monster" + ((score == 1) ? "." : "s."));
 
             #endregion
 
+        }
+
+        private static Race GetRace()
+        {
+            Console.WriteLine("Hello! Please select your race: ");
+            Console.WriteLine("1. Orc");
+            Console.WriteLine("2. Werewolf");
+            Console.WriteLine("3. Griffin");
+            Console.WriteLine("4. Dwarf");
+            Console.WriteLine("5. Cyborg");
+            Console.WriteLine("6. Human");
+
+            Console.WriteLine("\nEnter the number corresponding to your race.");
+            int raceChoice = Convert.ToInt32(Console.ReadLine());
+            Race race;
+            switch (raceChoice)
+            {
+                case 1:
+                    race = Race.Orc;
+                    break;
+                case 2:
+                    race = Race.Werewolf;
+                    break;
+                case 3:
+                    race = Race.Griffin;
+                    break;
+                case 4:
+                    race = Race.Dwarf;
+                    break;
+                case 5:
+                    race = Race.Cyborg;
+                    break;
+                case 6:
+                    race = Race.Human;
+                    break;
+                default:
+                    race = (Race)(new Random().Next(6));
+                    break;
+            }
+
+            Console.WriteLine($"Great choice! You selected {race} as your face.");
+            return race;
+        }
+
+        private static Weapon GetWeapon()
+        {
+            Weapon w1 = new Weapon("The Dragon Slayer", 35, 20, 10, true, WeaponType.Sword);
+            Weapon w2 = new Weapon("Nerf Gun", 25, 15, 5, false, WeaponType.Projectile);
+            Weapon w3 = new Weapon("Bloody Dagger", 15, 10, 5, false, WeaponType.Knife);
+            Weapon w4 = new Weapon("RPG-7", 75, 50, 30, true, WeaponType.GrenadeLauncher);
+            Weapon w5 = new Weapon("Double Sided Axe", 30, 20, 10, true, WeaponType.Axe);
+            Console.WriteLine("Please choose a weapon:");
+            Console.WriteLine("\n1) " + w1);
+            Console.WriteLine("2)" + w2);
+            Console.WriteLine("3)" + w3);
+            Console.WriteLine("4)" + w4);
+            Console.WriteLine("5)" + w5);
+            Console.WriteLine("Enter the number of your weapon choice: ");
+            int choice = int.Parse(Console.ReadLine());
+            Weapon chosenWeapon;
+            switch (choice)
+            {
+                case 1:
+                    chosenWeapon = w1;
+                    break;
+                case 2:
+                    chosenWeapon = w2;
+                    break;
+                case 3:
+                    chosenWeapon = w3;
+                    break;
+                case 4:
+                    chosenWeapon = w4;
+                    break;
+                case 5:
+                    chosenWeapon = w5;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Defaulting to Weapon 1.");
+                    chosenWeapon = w1;
+                    break;
+            }
+
+            return chosenWeapon;
+        }
+
+        private static Monster GetMonster()
+        {
+            Demogorgon demogorgon = new Demogorgon("Slimy Demogorgon", 250, 30, 50, 250, 50, 30, "That is a slimy monster!", true);
+            Demogorgon demogorgon2 = new Demogorgon("Demogorgon", 200, 25, 30, 150, 30, 25, "That is a nasty looking monster!", false);
+
+            Griffin griffin = new Griffin("Griffin", 150, 20, 30, 120, 30, 10, "...", 10, 30);
+            Griffin griffin2 = new Griffin("Two-Headed Griffin", 200, 25, 30, 120, 25, 10, "....", 15, 35);
+
+            Vampire vampire = new Vampire("Dracula", 100, 25, 15, 100, 25, 15, "A blood-sucking fiend.");
+            KingKong kingKong = new KingKong("King Kong", 350, 35, 50, 350, 100, 75, "A gigantic preshistoric Ape.", true);
+
+            Monster[] monsters = { demogorgon, demogorgon2, griffin, griffin2, vampire, vampire, kingKong };
+
+            Random randMonster = new Random();
+
+            int randNbr = randMonster.Next(monsters.Length);
+
+            Monster chosenMonster = monsters[randNbr];
+            return chosenMonster;
         }
 
         #region Create GetRoom() Functionality
@@ -251,5 +326,11 @@ namespace DungeonApplication
 
 
         #endregion
+
+        //Create a character objeect
+        //Try to increase it's heatlh above max.
+        //MaxLife = 10
+        //Life = 15;
+        //Assert.Equal(MaxLife, Life)
     }
 }
