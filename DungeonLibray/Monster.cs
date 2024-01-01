@@ -31,6 +31,9 @@ namespace DungeonLibray
                 }
             }
         }
+
+        public int Initiative { get; internal set; }
+
         //CONSTRUCTOR
         public Monster(string name, int maxLife, int hitChance, int block, int life, int maxDamage, int minDamage, string description)
             : base(name, maxLife, hitChance, block, life)

@@ -12,7 +12,7 @@ namespace DungeonLibray
         Werewolf,
         Griffin,
         Dwarf,
-        Cyclops,
+        Cyborg,
         Human,
     }
 }

@@ -58,14 +58,14 @@ namespace DungeonLibray
             #region Customization Option - Initiative
             //Consider adding an Initiative property to Charactter, then
             //check the Initivative of the Player & Monste to determine who attacks first
-            //if (player.Initiative >= monster.Initiative)
-            //{
-            //    DoAttack(player, monster);
-            //}
-            //else
-            //{
-            //      DoAttack(monster, player);
-            //}
+            if (player.Initiative >= monster.Initiative)
+            {
+                DoAttack(player, monster);
+            }
+            else
+            {
+                  DoAttack(monster, player);
+            }
 
 
             #endregion
@@ -79,5 +79,6 @@ namespace DungeonLibray
                 DoAttack(monster, player);
             }
         }
+
     }
 }

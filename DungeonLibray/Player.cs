@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace DungeonLibray
 {
-    public class Player : Character
+    public sealed class Player : Character
     {
+        private Race race;
+        private Weapon chosenWeapon;
+
         //FIELDS
 
         //PROPERTIES
         public Race CharacterRace { get; set; }
         public Weapon EquppiedWeapon { get; set; }
+        public int Initiative { get; internal set; }
+
 
         //CONSTRUCTORS
         public Player(string name, int maxLife, int hitChance, int block, int life, Race characterRace, Weapon equppiedWeapon)
@@ -22,13 +27,14 @@ namespace DungeonLibray
             EquppiedWeapon = equppiedWeapon;
         }
 
+    
+
         //METHODS
 
         public override string ToString()
         {
             //return base.ToString();
-            return $"-=-=-= PLAYER =-=-=-\nName: {Name}\nMax Life: {MaxLife}\nHit Chance: {HitChance}\nBlock: {Block}\nLife:{Life}\nRace: {CharacterRace}" +
-                $"\nWeapon Euppied: {EquppiedWeapon}";
+            return $"-=-=-= PLAYER =-=-=-\nName: {Name}\nLife: {Life}-{MaxLife}\nHit Chance: {HitChance}\nBlock: {Block}\nRace: {CharacterRace}\nWeapon Equppied: {EquppiedWeapon}";
 
         }
 
@@ -44,7 +50,27 @@ namespace DungeonLibray
             return base.CalcHitChance() + EquppiedWeapon.BonusHitChance;
         }
 
-
+        //public int CalcAttackBonus()
+        //{
+        //    int attackBonus = 0;
+        //    if (CharacterRace == Race.Cyborg)
+        //    {
+        //        attackBonus += 10;
+        //    }
+        //    else if (CharacterRace == Race.Dwarf)
+        //    {
+        //        attackBonus -= 5;
+        //    }
+        //    else if (CharacterRace == Race.Werewolf)
+        //    {
+        //        attackBonus += 5;
+        //    }
+        //    else if (CharacterRace == Race.Griffin)
+        //    {
+        //        attackBonus += 15;
+        //    }
+        //    return attackBonus;
+        //}
 
     }
 }
